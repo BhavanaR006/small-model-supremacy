@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conference_talk_simple.schema.json",
+  "title": "Conference Talk",
+  "description": "Structured extraction schema for conference talk information. A simple schema with 4 fields capturing the essential details of a conference presentation.",
+  "type": "object",
+  "properties": {
+    "speaker_name": {
+      "type": "string",
+      "description": "Full name of the speaker presenting the talk, including any titles or honorifics"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Title or subject matter of the conference talk"
+    },
+    "conference": {
+      "type": "string",
+      "description": "Name of the conference or event where the talk was presented"
+    },
+    "location": {
+      "type": "string",
+      "description": "City, venue, or geographic location where the conference took place"
+    }
+  },
+  "required": ["speaker_name", "topic", "conference", "location"],
+  "additionalProperties": false
+}

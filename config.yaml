@@ -1,0 +1,41 @@
+model:
+  name: "Qwen/Qwen2.5-3B"
+  max_seq_length: 2048
+training:
+  lora_rank: 64
+  lora_alpha: 128
+  learning_rate: 2.0e-4
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  num_epochs: 3
+  warmup_steps: 100
+  checkpoint_interval: 500
+  eval_interval: 100
+  early_stopping_patience: 3
+  early_stopping_threshold: 0.001
+  max_memory_gb: 24.0
+  resume_from: null
+data:
+  schemas_dir: "schemas/"
+  output_dir: "data/"
+  seed: 42
+  min_tokens: 50
+  max_tokens: 2000
+  adversarial_ratio: 0.15
+  min_examples_per_schema: 1000
+  min_test_per_schema: 100
+  generation_model: "claude-3-5-sonnet-20241022"
+  cache_dir: "cache/api_responses/"
+evaluation:
+  test_set_path: "data/test.jsonl"
+  baselines: ["gpt-4o", "claude-3-5-sonnet", "base_model"]
+  temperature: 0.0
+  seed: 42
+  bootstrap_iterations: 1000
+  output_dir: "results/"
+  retry_count: 3
+infrastructure:
+  wandb_project: "small-model-supremacy"
+  wandb_entity: null
+  device: "auto"
+  docker_image: "nvidia/cuda:12.1.0-devel-ubuntu22.04"

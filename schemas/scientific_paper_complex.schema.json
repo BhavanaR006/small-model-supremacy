@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scientific_paper_complex.schema.json",
+  "title": "Scientific Paper",
+  "description": "Structured extraction schema for scientific paper metadata. A complex schema with 16 fields including arrays of nested objects for authors, references, and datasets.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Full title of the scientific paper"
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of paper authors with their affiliations and roles",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the author"
+          },
+          "affiliation": {
+            "type": "string",
+            "description": "Institutional affiliation of the author"
+          },
+          "is_corresponding": {
+            "type": "boolean",
+            "description": "Whether this author is the corresponding author"
+          }
+        },
+        "required": ["name", "affiliation", "is_corresponding"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "abstract": {
+      "type": "string",
+      "description": "Full abstract text summarizing the paper's contributions"
+    },
+    "publication_venue": {
+      "type": "string",
+      "description": "Journal name, conference name, or preprint server where the paper was published"
+    },
+    "publication_date": {
+      "type": "string",
+      "description": "Publication date in ISO 8601 format (YYYY-MM-DD)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "doi": {
+      "type": ["string", "null"],
+      "description": "Digital Object Identifier for the paper, null if not yet assigned"
+    },
+    "keywords": {
+      "type": "array",
+      "description": "List of keywords or key phrases describing the paper's subject areas",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "research_field": {
+      "type": "string",
+      "description": "Primary research field or discipline",
+      "enum": [
+        "computer_science",
+        "biology",
+        "physics",
+        "chemistry",
+        "mathematics",
+        "medicine",
+        "engineering",
+        "social_sciences",
+        "environmental_science",
+        "materials_science",
+        "other"
+      ]
+    },
+    "methodology": {
+      "type": "string",
+      "description": "Primary research methodology or approach used",
+      "enum": [
+        "experimental",
+        "computational",
+        "theoretical",
+        "survey",
+        "meta_analysis",
+        "case_study",
+        "mixed_methods"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "description": "List of key findings or contributions of the paper",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "datasets_used": {
+      "type": "array",
+      "description": "Datasets referenced or used in the research",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name or identifier of the dataset"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source or repository where the dataset is available"
+          },
+          "size": {
+            "type": ["string", "null"],
+            "description": "Size description of the dataset (e.g., '10K samples', '2.5GB'), null if not specified"
+          }
+        },
+        "required": ["name", "source"],
+        "additionalProperties": false
+      }
+    },
+    "funding_sources": {
+      "type": "array",
+      "description": "Organizations or grants that funded the research",
+      "items": {
+        "type": "string"
+      }
+    },
+    "citation_count": {
+      "type": ["integer", "null"],
+      "description": "Number of citations the paper has received, null if unknown or not yet cited",
+      "minimum": 0
+    },
+    "is_peer_reviewed": {
+      "type": "boolean",
+      "description": "Whether the paper has undergone peer review"
+    },
+    "code_repository": {
+      "type": ["string", "null"],
+      "description": "URL to the code repository associated with the paper, null if no code is available"
+    },
+    "references": {
+      "type": "array",
+      "description": "Key references cited in the paper",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the referenced paper"
+          },
+          "authors": {
+            "type": "string",
+            "description": "Authors of the referenced paper (formatted as a string)"
+          },
+          "year": {
+            "type": "integer",
+            "description": "Publication year of the referenced paper"
+          }
+        },
+        "required": ["title", "authors", "year"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "title",
+    "authors",
+    "abstract",
+    "publication_venue",
+    "publication_date",
+    "keywords",
+    "research_field",
+    "methodology",
+    "findings",
+    "datasets_used",
+    "funding_sources",
+    "citation_count",
+    "is_peer_reviewed",
+    "code_repository",
+    "references"
+  ],
+  "additionalProperties": false
+}

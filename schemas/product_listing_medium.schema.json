@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "product_listing_medium.schema.json",
+  "title": "Product Listing",
+  "description": "Structured extraction schema for e-commerce product listings. A medium-complexity schema with 9 fields including nested objects for pricing and dimensions.",
+  "type": "object",
+  "properties": {
+    "product_name": {
+      "type": "string",
+      "description": "Full name or title of the product as listed"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand or manufacturer name of the product"
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary product category classification",
+      "enum": [
+        "electronics",
+        "clothing",
+        "home_garden",
+        "sports_outdoors",
+        "books",
+        "food_beverage",
+        "health_beauty",
+        "toys_games",
+        "automotive",
+        "other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief product description summarizing key features and selling points"
+    },
+    "pricing": {
+      "type": "object",
+      "description": "Pricing information for the product",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Numeric price value",
+          "minimum": 0
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code (e.g., USD, EUR, GBP)",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "discount_percentage": {
+          "type": ["number", "null"],
+          "description": "Discount percentage if on sale, null if no discount applies",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": ["amount", "currency"],
+      "additionalProperties": false
+    },
+    "dimensions": {
+      "type": "object",
+      "description": "Physical dimensions of the product",
+      "properties": {
+        "length_cm": {
+          "type": "number",
+          "description": "Length in centimeters",
+          "minimum": 0
+        },
+        "width_cm": {
+          "type": "number",
+          "description": "Width in centimeters",
+          "minimum": 0
+        },
+        "height_cm": {
+          "type": "number",
+          "description": "Height in centimeters",
+          "minimum": 0
+        },
+        "weight_kg": {
+          "type": "number",
+          "description": "Weight in kilograms",
+          "minimum": 0
+        }
+      },
+      "required": ["length_cm", "width_cm", "height_cm", "weight_kg"],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "string",
+      "description": "Product condition indicating whether it is new or used",
+      "enum": ["new", "refurbished", "used_like_new", "used_good", "used_acceptable"]
+    },
+    "availability": {
+      "type": "string",
+      "description": "Current stock availability status",
+      "enum": ["in_stock", "out_of_stock", "pre_order", "limited_stock"]
+    },
+    "sku": {
+      "type": "string",
+      "description": "Stock Keeping Unit identifier for inventory tracking"
+    },
+    "features": {
+      "type": "array",
+      "description": "List of key product features or specifications",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "product_name",
+    "brand",
+    "category",
+    "description",
+    "pricing",
+    "dimensions",
+    "condition",
+    "availability",
+    "sku"
+  ],
+  "additionalProperties": false
+}

@@ -20,7 +20,7 @@ env/
 *.swo
 
 # Data and model artifacts
-data/*.jsonl
+# data/*.jsonl  # Uncomment this to ignore data files for large datasets
 cache/api_responses/
 checkpoints/*.pt
 checkpoints/*.bin

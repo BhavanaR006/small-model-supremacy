@@ -22,9 +22,9 @@ env/
 # Data and model artifacts
 # data/*.jsonl  # Uncomment this to ignore data files for large datasets
 cache/api_responses/
-checkpoints/*.pt
-checkpoints/*.bin
-checkpoints/*.safetensors
+# checkpoints/*.pt
+# checkpoints/*.bin
+# checkpoints/*.safetensors
 results/*.csv
 results/*.png
 

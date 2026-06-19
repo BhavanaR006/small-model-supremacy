@@ -1,6 +1,6 @@
 """Tokenizer utilities for token counting and length-based filtering.
 
-Uses the Qwen tokenizer (Qwen/Qwen2.5-3B) for accurate token counting.
+Uses the Qwen tokenizer (Qwen/Qwen2.5-1.5B) for accurate token counting.
 Falls back to a word-count approximation if the tokenizer cannot be loaded
 (e.g., no network access, missing model files).
 
@@ -23,7 +23,7 @@ _tokenizer: Any = None
 _tokenizer_loaded: bool = False
 _using_fallback: bool = False
 
-MODEL_NAME = "Qwen/Qwen2.5-3B"
+MODEL_NAME = "Qwen/Qwen2.5-1.5B"
 
 # Approximation ratio: average tokens per word for English text.
 # Qwen tokenizer typically produces ~1.3 tokens per whitespace-delimited word.

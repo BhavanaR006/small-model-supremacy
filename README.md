@@ -1,6 +1,6 @@
 # Small Model Supremacy
 
-> Beating frontier models with a 3B parameter model on structured data extraction.
+> Beating frontier models with a fine-tuned 1.5B parameter model on structured data extraction.
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-**Small Model Supremacy** demonstrates that a carefully fine-tuned 3B parameter model can outperform GPT-4o and Claude 3.5 Sonnet on structured data extraction from unstructured text.
+**Small Model Supremacy** demonstrates that a carefully fine-tuned 1.5B parameter model can outperform GPT-4o and Claude 3.5 Sonnet on structured data extraction from unstructured text.
 
 The core insight: frontier models frequently hallucinate fields or produce malformed JSON on complex schemas. A small model trained on high-quality extraction pairs achieves near-perfect schema compliance — faster, cheaper, and fully under your control.
 
@@ -129,7 +129,7 @@ print(tokenizer.decode(outputs[0][inputs["input_ids"].shape[1]:], skip_special_t
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Training approach:** QLoRA with 4-bit NF4 quantization, LoRA rank 64, alpha 128. Effective batch size of 16 via gradient accumulation. Early stopping monitors validation loss with patience of 3 intervals.
+**Training approach:** QLoRA with 4-bit NF4 quantization, LoRA rank 32, alpha 64. Effective batch size of 16 via gradient accumulation. Early stopping monitors validation loss with patience of 3 intervals.
 
 ---
 
@@ -190,16 +190,16 @@ All settings live in `config.yaml`. No hardcoded values in source code.
 
 ```yaml
 model:
-  name: "Qwen/Qwen2.5-3B"       # Base model from HuggingFace
+  name: "Qwen/Qwen2.5-1.5B"       # Base model from HuggingFace
   max_seq_length: 2048            # Maximum input sequence length
 
 training:
-  lora_rank: 64                   # LoRA rank (higher = more capacity)
-  lora_alpha: 128                 # LoRA scaling factor
+  lora_rank: 32                   # LoRA rank (higher = more capacity)
+  lora_alpha: 64                  # LoRA scaling factor
   learning_rate: 2.0e-4           # Peak learning rate
   batch_size: 4                   # Per-device batch size
   gradient_accumulation_steps: 4  # Effective batch = 16
-  num_epochs: 3                   # Maximum training epochs
+  num_epochs: 5                   # Maximum training epochs
   max_memory_gb: 24.0             # GPU memory budget
 
 data:

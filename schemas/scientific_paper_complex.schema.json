@@ -150,8 +150,12 @@
             "description": "Title of the referenced paper"
           },
           "authors": {
-            "type": "string",
-            "description": "Authors of the referenced paper (formatted as a string)"
+            "type": "array",
+            "description": "Authors of the referenced paper",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
           },
           "year": {
             "type": "integer",

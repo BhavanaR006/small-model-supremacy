@@ -1,13 +1,13 @@
 model:
-  name: "Qwen/Qwen2.5-3B"
+  name: "Qwen/Qwen2.5-1.5B"
   max_seq_length: 2048
 training:
-  lora_rank: 64
-  lora_alpha: 128
+  lora_rank: 32
+  lora_alpha: 64
   learning_rate: 2.0e-4
   batch_size: 4
   gradient_accumulation_steps: 4
-  num_epochs: 3
+  num_epochs: 5
   warmup_steps: 100
   checkpoint_interval: 500
   eval_interval: 100

@@ -27,6 +27,11 @@ cache/api_responses/
 # checkpoints/*.safetensors
 results/*.csv
 results/*.png
+results/*.md
+
+# Duplicate model outputs (use checkpoints/final/ as canonical)
+model_final/
+model_final.zip
 
 # Environment
 .env

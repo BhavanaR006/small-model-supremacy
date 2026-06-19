@@ -15,7 +15,7 @@ from src.data.curator import DataExample, DatasetSplits, DatasetStats, SourceMet
 def sample_config_file(tmp_path):
     """Create a minimal valid config.yaml for testing."""
     config = {
-        "model": {"name": "Qwen/Qwen2.5-3B", "max_seq_length": 2048},
+        "model": {"name": "Qwen/Qwen2.5-1.5B", "max_seq_length": 2048},
         "data": {
             "schemas_dir": str(tmp_path / "schemas"),
             "output_dir": str(tmp_path / "data"),
@@ -170,7 +170,7 @@ class TestMainCLI:
 
         # Write config
         config = {
-            "model": {"name": "Qwen/Qwen2.5-3B"},
+            "model": {"name": "Qwen/Qwen2.5-1.5B"},
             "data": {
                 "schemas_dir": str(schemas_dir),
                 "output_dir": str(tmp_path / "data"),
@@ -267,7 +267,7 @@ class TestMainCLI:
         schemas_dir.mkdir()
 
         config = {
-            "model": {"name": "Qwen/Qwen2.5-3B"},
+            "model": {"name": "Qwen/Qwen2.5-1.5B"},
             "data": {
                 "schemas_dir": str(schemas_dir),
                 "output_dir": str(tmp_path / "data"),

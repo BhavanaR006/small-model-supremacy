@@ -15,7 +15,7 @@ class ModelConfig(BaseModel):
     """Configuration for the base model."""
 
     name: str = Field(
-        description="HuggingFace model identifier (e.g., 'Qwen/Qwen2.5-3B')"
+        description="HuggingFace model identifier (e.g., 'Qwen/Qwen2.5-1.5B')"
     )
     max_seq_length: int = Field(
         default=2048,

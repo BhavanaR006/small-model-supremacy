@@ -708,7 +708,7 @@ def generate_additional_data(num_per_schema=300):
 
 
 if __name__ == "__main__":
-    data_dir = "/Users/bhavanar/Documents/small_model_big_wins/data"
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
     train_file = os.path.join(data_dir, "train.jsonl")
 
     # Count existing lines

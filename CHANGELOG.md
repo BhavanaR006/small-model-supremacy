@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Technical Decisions
 
-- **Base model:** Qwen2.5-3B selected for strong instruction-following at small scale
+- **Base model:** Qwen2.5-1.5B selected for strong instruction-following at small scale
 - **Fine-tuning:** QLoRA (rank 64, alpha 128) to fit within 24GB VRAM budget
 - **Data generation:** Claude 3.5 Sonnet as the primary generation model with caching for reproducibility
 - **Evaluation:** Bootstrap resampling (n=1000) for 95% confidence intervals

@@ -45,13 +45,43 @@ from peft import PeftModel
 
 warnings.filterwarnings('ignore')
 
-# Set paths
-REPO_ROOT = Path(".")  # Adjust if needed
+# Set paths — auto-detect repo root
+# Works whether you're already inside the repo or in /kaggle/working
+if Path("data/test.jsonl").exists():
+    REPO_ROOT = Path(".")
+elif Path("small-model-supremacy/data/test.jsonl").exists():
+    REPO_ROOT = Path("small-model-supremacy")
+    os.chdir(REPO_ROOT)
+    REPO_ROOT = Path(".")
+else:
+    raise FileNotFoundError(
+        "Cannot find data/test.jsonl. Make sure you ran:\n"
+        "  !git clone https://github.com/BhavanaR006/small-model-supremacy.git\n"
+        "  %cd small-model-supremacy"
+    )
+
 DATA_DIR = REPO_ROOT / "data"
 SCHEMAS_DIR = REPO_ROOT / "schemas"
 CHECKPOINT_DIR = REPO_ROOT / "checkpoints" / "final"
 RESULTS_DIR = REPO_ROOT / "results"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
+# If adapter files aren't in checkpoints/final, check kaggle input
+if not (CHECKPOINT_DIR / "adapter_config.json").exists():
+    # Try common kaggle input paths
+    kaggle_paths = [
+        Path("/kaggle/input/model-final"),
+        Path("/kaggle/input/model-final/model_final"),
+        Path("/kaggle/input/modelfinal"),
+    ]
+    for p in kaggle_paths:
+        if (p / "adapter_config.json").exists():
+            CHECKPOINT_DIR = p
+            print(f"  Using adapter from: {CHECKPOINT_DIR}")
+            break
+    else:
+        print("  WARNING: adapter_config.json not found in checkpoints/final/")
+        print("  Make sure your model is uploaded as a Kaggle dataset")
 
 BASE_MODEL_NAME = "Qwen/Qwen2.5-1.5B"
 SEED = 42
@@ -717,8 +747,9 @@ print("=" * 60)
 
 import shutil
 
-# Create a zip of results
-zip_path = shutil.make_archive('/kaggle/working/results', 'zip', str(RESULTS_DIR))
+# Create a zip of results (works on Kaggle and locally)
+output_zip_dir = Path("/kaggle/working") if Path("/kaggle/working").exists() else RESULTS_DIR.parent
+zip_path = shutil.make_archive(str(output_zip_dir / 'results'), 'zip', str(RESULTS_DIR))
 print(f"  ✓ Results packaged: {zip_path}")
 
 # Final summary

@@ -17,10 +17,10 @@ The core insight: frontier models frequently hallucinate fields or produce malfo
 
 This project provides a complete, reproducible ML pipeline:
 
-- 🎯 **Synthetic data generation** using frontier model APIs with validation and caching
-- ⚡ **QLoRA fine-tuning** that fits on a single RTX 4090 (24GB VRAM)
-- 📊 **Rigorous evaluation** with bootstrap confidence intervals and statistical significance testing
-- 🔧 **Robust output parsing** with JSON repair heuristics for production reliability
+- **Synthetic data generation** using frontier model APIs with validation and caching
+- **QLoRA fine-tuning** that fits on a single RTX 4090 (24GB VRAM)
+- **Rigorous evaluation** with bootstrap confidence intervals and statistical significance testing
+- **Robust output parsing** with JSON repair heuristics for production reliability
 
 ---
 

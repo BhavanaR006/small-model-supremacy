@@ -603,7 +603,7 @@ def write_jsonl(data, filepath):
 if __name__ == "__main__":
     import os
     
-    output_dir = "/Users/bhavanar/Documents/small_model_supremacy/data"
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".")
     os.makedirs(output_dir, exist_ok=True)
     
     print("Generating data...")
